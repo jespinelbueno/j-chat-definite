@@ -39,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://whispering-taiga-96830.herokuapp.com/"
+  "proxy": "http://localhost:3001"
 }

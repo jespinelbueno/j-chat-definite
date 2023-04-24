@@ -22,11 +22,16 @@ const devConfig = {
   port: process.env.PG_PORT,
 };
 
+const devConfig2={
+  connectionString: process.env.DATABASE_URL
+}
+
 const proConfig = {
   connectionString: process.env.DATABASE_URL
 }
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? proConfig : devConfig);
+
 
 app.use(cors());
 app.use(express.json());

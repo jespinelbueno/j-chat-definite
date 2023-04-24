@@ -1,0 +1,42 @@
+.main-container-login {
+  height: 100vh;
+  width: 100vw;
+  margin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  background: var(--bg-color);
+}
+
+.login-container {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  background-color: var(--card-bg-color); /* or any other background color */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.discrete {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0);
+  padding-bottom: 4px;
+  margin-left: auto;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  margin-top: 40px;
+}
+a.discrete:hover {
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+}

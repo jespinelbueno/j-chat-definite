@@ -1,0 +1,220 @@
+.chat-container{
+  height: 100%;
+}
+
+.user-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.users {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+strong{
+  font-weight: bold;
+}
+
+.users > * {
+  display: flex;
+  /* optional: add margin or padding if needed */
+  margin: 10px;
+  padding: 5px;
+}
+.input-and-send {
+  transition: background-color 0.3s ease;
+  background-color: var(--bg-color);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* make sure the container is on top of other elements */
+  margin-bottom: 20px;
+}
+
+.users ul{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.input-and-send button {
+  font-size: 20px;
+  padding:15px;
+}
+
+.timestamp {
+  font-size: 7px;
+}
+
+.message-input {
+  padding-left: 10px;
+  width: 40%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.message-input:focus {
+  outline: none;
+  width: 50%;
+  border-color: #3c8dbc;
+}
+
+.message-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: Helvetica;
+  background-color: white; /* or any other background color */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.message-bubble {
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-block;
+  max-width: 80%;
+  margin-bottom: 20px;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.message-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 2;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgb(200, 200, 200);
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #4d9ff1;
+  color: white;
+}
+
+.user-message::before {
+  left: auto;
+  right: 1;
+  border-top-color: #4d9ff1;
+}
+
+.user-button:focus{
+  transform: translateY(-3px);
+    box-shadow: 0 2px 6px -1px #31679d;
+
+}
+
+.timestamp {
+  font-size: 0.8em;
+  display: block;
+  text-align: right;
+  margin-top: 4px;
+  color: #555;
+}
+.other-user{
+  color: black;
+}
+
+.other-user .timestamp {
+  color: #000000;
+}
+.chat-container {
+  transition: background-color 0.3s ease;
+  background:  var(--bg-color); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 2;
+}
+
+.no-messages-title{
+  color: #000000;
+}
+
+.user-avatar,
+.message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.avatar {
+  border-radius: 50%; /* Make the image a circle */
+  height: 32px; /* Adjust the size */
+  width: 32px; /* Adjust the size */
+  object-fit: cover;
+  margin-right: 8px; /* Add some space between the image and the message */
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 8px;
+  justify-content: flex-start;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.message-info {
+  display: flex;
+  align-items: flex-end;
+}
+
+.align-right {
+  justify-self: flex-end;
+  margin-left: auto;
+}
+
+.user-row .message-bubble {
+  margin-right: 16px;
+}
+
+.other-user-row .message-bubble {
+  margin-left: 16px;
+  color: #000000;
+}
+
+.user-message-bubble {
+  background-color: #4d9ff1;
+  color: white;
+}
+
+.user-message-bubble::before {
+  left: auto;
+  right: 1;
+  border-top-color: #4d9ff1;
+}

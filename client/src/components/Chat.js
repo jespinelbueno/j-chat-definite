@@ -34,7 +34,7 @@ const Chat = () => {
 
   const fetchCurrentUser = async () => {
     const response = await axios.get(
-      `https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/users/${currentUserId}`,
+      `https://juandi-chat-backend.vercel.app/api/users/${currentUserId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -47,7 +47,7 @@ const Chat = () => {
 
   const fetchUsers = async () => {
     const response = await axios.get(
-      "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/users",
+      "https://juandi-chat-backend.vercel.app/api/users",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -75,7 +75,7 @@ const Chat = () => {
 
     try {
       const response = await axios.get(
-        `/api/users/${id}`,
+        `https://juandi-chat-backend.vercel.app/api/users/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -93,7 +93,7 @@ const Chat = () => {
   const fetchUsersList = async () => {
     try {
       const response = await axios.get(
-        "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/users",
+        "https://juandi-chat-backend.vercel.app/api/users",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -111,7 +111,7 @@ const Chat = () => {
     }
 
     const response = await axios.get(
-      `https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/messages/${recipientId}`,
+      `https://juandi-chat-backend.vercel.app/api/messages/${recipientId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -158,7 +158,7 @@ const Chat = () => {
     }
 
     await axios.post(
-      "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/messages", // Include recipient_id here
+      "https://juandi-chat-backend.vercel.app/api/messages", // Include recipient_id here
       { content: newMessage, sender_id, recipient_id: recipientId },
       { headers: { Authorization: `Bearer ${token}` } }
     );

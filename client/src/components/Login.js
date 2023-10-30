@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/login",
+        "https://juandi-chat-backend.vercel.app/api/login",
         {
           username,
           password,

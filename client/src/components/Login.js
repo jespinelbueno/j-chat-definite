@@ -14,10 +14,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/login",
+        {
+          username,
+          password,
+        }
+      );
 
       // Save the token to localStorage or to your state management solution
       localStorage.setItem("token", response.data.token);

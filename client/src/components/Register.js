@@ -13,11 +13,14 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("/api/register", {
-        username,
-        email,
-        password,
-      });
+      await axios.post(
+        "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
 
       if (username === null) {
         window.alert("Please enter a username");

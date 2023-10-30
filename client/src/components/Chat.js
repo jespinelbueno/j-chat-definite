@@ -34,7 +34,7 @@ const Chat = () => {
 
   const fetchCurrentUser = async () => {
     const response = await axios.get(
-      `/api/users/${currentUserId}`,
+      `https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/users/${currentUserId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -46,9 +46,12 @@ const Chat = () => {
   };
 
   const fetchUsers = async () => {
-    const response = await axios.get("/api/users", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(
+      "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/users",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const allUsers = response.data
       .filter((user) => user.id !== currentUserId) // Filter out the current user
       .map((user) => {
@@ -89,9 +92,12 @@ const Chat = () => {
 
   const fetchUsersList = async () => {
     try {
-      const response = await axios.get("/api/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/users",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setUsersList(response.data);
     } catch (error) {
@@ -105,7 +111,7 @@ const Chat = () => {
     }
 
     const response = await axios.get(
-      `/api/messages/${recipientId}`,
+      `https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/messages/${recipientId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -152,7 +158,7 @@ const Chat = () => {
     }
 
     await axios.post(
-      "/api/messages", // Include recipient_id here
+      "https://j-chat-definite-cemznifd7-jespinelbueno-libertyedu.vercel.app/api/messages", // Include recipient_id here
       { content: newMessage, sender_id, recipient_id: recipientId },
       { headers: { Authorization: `Bearer ${token}` } }
     );

@@ -9,8 +9,14 @@
 
 .users {
   text-align: center;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
+}
+
+.show-more-button{
+  background-color: #555;
+  
 }
 
 strong{
@@ -218,3 +224,4 @@ strong{
   right: 1;
   border-top-color: #4d9ff1;
 }
+

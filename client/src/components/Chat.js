@@ -15,6 +15,13 @@ const Chat = () => {
   const [users, setUsers] = useState([]);
   const [usersList, setUsersList] = useState([]);
 
+    const [displayCount, setDisplayCount] = useState(2); // Initial number of users to display
+
+    const handleShowMore = () => {
+      // Increase the number of users to display by a certain amount
+      setDisplayCount(displayCount + 2);
+    };
+
   const [currentUser, setCurrentUser] = useState(null);
 
   const token = localStorage.getItem("token");
@@ -182,14 +189,18 @@ const Chat = () => {
       <NavBar></NavBar>
       {username && (
         <p>
-          Welcome, <strong>{username}</strong>!
+          Welcome,{" "}
+          <strong>
+            {username.charAt(0).toUpperCase() + username.slice(1)}
+          </strong>
+          ! Who are you wanting to chat with?
         </p>
       )}
 
       <div className='user-container'>
         <div className='users'>
           <ul>
-            {users.map((user) => (
+            {users.slice(0, displayCount).map((user) => (
               <button
                 className='user-button'
                 key={user.id}
@@ -199,12 +210,16 @@ const Chat = () => {
                   className='user-avatar'
                   src={user.avatar_url}
                   alt={`${user.username}'s avatar`}
-                />{" "}
-                {/* Display avatar */}
-                {user.username}
+                />
+                {user.username.charAt(0).toUpperCase() + user.username.slice(1)}
               </button>
             ))}
           </ul>
+          {displayCount < users.length && ( // Display "Show More" button if there are more users
+            <button className='show-more-button' onClick={handleShowMore}>
+              Show More
+            </button>
+          )}
         </div>
       </div>
 

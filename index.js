@@ -229,22 +229,28 @@ app.get("/api/messages/:recipient_id", authenticateJWT, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 app.post("/api/messages", async (req, res) => {
-  const { sender_id, content, recipient_id } = req.body;
+  const { content, sender_id, recipient_id, timestamp } = req.body;
+
+  // Check if content is provided
+  if (!content) {
+    return res.status(400).json({ message: "Content is required" });
+  }
 
   try {
     await pool.query(
-      "INSERT INTO messages(content, sender_id, recipient_id) VALUES($1, $2, $3)",
-      [content, sender_id, recipient_id]
+      "INSERT INTO messages(content, sender_id, recipient_id, timestamp) VALUES($1, $2, $3, $4)",
+      [content, sender_id, recipient_id, timestamp]
     );
 
     res.status(201).json({ message: "Message sent successfully" });
+    console.log("Message sent");
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));

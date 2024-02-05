@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import UserContext from "./UserContext";
 import "./styles/Chat.css";
 import NavBar from "./NavBar";
 import jwtDecode from "jwt-decode";
@@ -13,14 +12,12 @@ const Chat = () => {
   const [messagesWithUsernames, setMessagesWithUsernames] = useState([]);
   const [recipientId, setRecipientId] = useState(null);
   const [users, setUsers] = useState([]);
-  const [usersList, setUsersList] = useState([]);
+  const [displayCount, setDisplayCount] = useState(2); // Initial number of users to display
 
-    const [displayCount, setDisplayCount] = useState(2); // Initial number of users to display
-
-    const handleShowMore = () => {
-      // Increase the number of users to display by a certain amount
-      setDisplayCount(displayCount + 2);
-    };
+  const handleShowMore = () => {
+    // Increase the number of users to display by a certain amount
+    setDisplayCount(displayCount + 2);
+  };
 
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -97,22 +94,8 @@ const Chat = () => {
     }
   };
 
-  const fetchUsersList = async () => {
-    try {
-      const response = await axios.get(
-        "https://juandi-chat-backend.vercel.app/api/users",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      setUsersList(response.data);
-    } catch (error) {
-      console.error("Error fetching users list:", error.message);
-    }
-  };
-
   const fetchMessages = async () => {
+    console.log("Fetching messages for recipient:", recipientId);
     if (!recipientId) {
       return;
     }
@@ -144,10 +127,22 @@ const Chat = () => {
     setMessagesWithUsernames(messagesWithUsernames);
   };
 
+  const getRecipientName = (recipientId) => {
+    const recipient = users.find((user) => user.id === recipientId);
+    return recipient ? recipient.username : "Unknown User";
+  };
+
+  const getRecipientAvatar = () => {
+    const recipient = users.find((user) => user.id === recipientId);
+    return recipient ? recipient.avatar_url : "Unknown Avatar";
+  };
+
   const sendMessage = async () => {
     if (newMessage.trim() === "") {
       return;
     }
+
+    const timestamp = new Date().getTime(); // Move timestamp creation here
 
     // Obtain the sender_id from the UserContext or localStorage
     const userString = localStorage.getItem("user");
@@ -166,7 +161,7 @@ const Chat = () => {
 
     await axios.post(
       "https://juandi-chat-backend.vercel.app/api/messages", // Include recipient_id here
-      { content: newMessage, sender_id, recipient_id: recipientId },
+      { content: newMessage, sender_id, recipient_id: recipientId, timestamp },
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
@@ -174,15 +169,21 @@ const Chat = () => {
     fetchMessages();
   };
 
-  const handleUserSelection = (userId) => {
-    setRecipientId(userId);
-    fetchMessages();
-  };
+const handleUserSelection = (userId) => {
+  console.log("Recipient selected:", userId);
+  setRecipientId(userId);
+};
 
-  useEffect(() => {
-    fetchUsers();
-    fetchCurrentUser();
-  }, []);
+useEffect(() => {
+  fetchUsers();
+  fetchCurrentUser();
+}, []);
+
+useEffect(() => {
+  if (recipientId !== null) {
+    fetchMessages();
+  }
+}, [recipientId]);
 
   return (
     <div className='chat-container'>
@@ -206,12 +207,15 @@ const Chat = () => {
                 key={user.id}
                 onClick={() => handleUserSelection(user.id)}
               >
-                <img
-                  className='user-avatar'
-                  src={user.avatar_url}
-                  alt={`${user.username}'s avatar`}
-                />
-                {user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+                {user.username.length > 6
+                  ? `${
+                      user.username.charAt(0).toUpperCase() +
+                      user.username.slice(1, 6)
+                    }...`
+                  : `${
+                      user.username.charAt(0).toUpperCase() +
+                      user.username.slice(1)
+                    }`}
               </button>
             ))}
           </ul>
@@ -226,22 +230,24 @@ const Chat = () => {
       <br />
       {recipientId ? (
         <>
+          <div className='chatting-with'>
+            <p>
+              You are chatting with:{" "}
+              <strong>
+                {getRecipientName(recipientId).charAt(0).toUpperCase() +
+                  getRecipientName(recipientId).slice(1)}
+              </strong>
+            </p>
+            <img src={getRecipientAvatar()} alt='' />
+            {console.log(getRecipientAvatar())}
+          </div>
           <div className='message-container'>
             {messagesWithUsernames.length > 0 ? (
               messagesWithUsernames.map((message) => {
                 const user = users.find(
                   (user) => user.id === message.sender_id
                 );
-
-                console.log("Users array:", users);
-                console.log("Message sender ID:", message.sender_id);
-                console.log("User object:", user);
-
                 const avatarUrl = user?.avatar_url || "";
-
-                console.log("Avatar URL:", avatarUrl);
-                console.log("Message:", message);
-
                 return (
                   <div
                     key={message.id}

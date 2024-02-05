@@ -28,6 +28,10 @@ strong{
   /* optional: add margin or padding if needed */
   margin: 10px;
   padding: 5px;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
 }
 .input-and-send {
   transition: background-color 0.3s ease;
@@ -42,6 +46,21 @@ strong{
   align-items: center;
   z-index: 999; /* make sure the container is on top of other elements */
   margin-bottom: 20px;
+}
+
+.chatting-with{
+display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chatting-with img{
+
+  border-radius: 50%;
+  width: 40px;
+
+
 }
 
 .users ul{
@@ -125,10 +144,21 @@ strong{
   border-top-color: #4d9ff1;
 }
 
-.user-button:focus{
+
+
+.user-button:active{
   transform: translateY(-3px);
     box-shadow: 0 2px 6px -1px #31679d;
 
+}
+
+.user-button{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column ;
+  padding: 10px;
+  border-radius: 16px;
 }
 
 .timestamp {
@@ -159,13 +189,18 @@ strong{
   color: #000000;
 }
 
+.avatar-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .user-avatar,
 .message-avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 8px;
 }
 
 .avatar {

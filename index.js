@@ -230,7 +230,7 @@ app.get("/api/messages/:recipient_id", authenticateJWT, async (req, res) => {
   }
 });
 app.post("/api/messages", async (req, res) => {
-  const { content, sender_id, recipient_id, timestamp } = req.body;
+  const { content, sender_id, recipient_id } = req.body;
 
   // Check if content is provided
   if (!content) {
@@ -239,8 +239,8 @@ app.post("/api/messages", async (req, res) => {
 
   try {
     await pool.query(
-      "INSERT INTO messages(content, sender_id, recipient_id, timestamp) VALUES($1, $2, $3, $4)",
-      [content, sender_id, recipient_id, timestamp]
+      "INSERT INTO messages(content, sender_id, recipient_id) VALUES($1, $2, $3)",
+      [content, sender_id, recipient_id]
     );
 
     res.status(201).json({ message: "Message sent successfully" });

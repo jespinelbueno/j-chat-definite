@@ -143,6 +143,7 @@ const Chat = () => {
     }
 
     const timestamp = new Date().getTime(); // Move timestamp creation here
+    const timestampNumber = parseInt(timestamp, 10);
 
     // Obtain the sender_id from the UserContext or localStorage
     const userString = localStorage.getItem("user");
@@ -161,7 +162,7 @@ const Chat = () => {
 
     await axios.post(
       "https://juandi-chat-backend.vercel.app/api/messages", // Include recipient_id here
-      { content: newMessage, sender_id, recipient_id: recipientId, timestamp },
+      { content: newMessage, sender_id, recipient_id: recipientId },
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
